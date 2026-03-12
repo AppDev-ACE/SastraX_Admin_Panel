@@ -81,8 +81,8 @@ export default function Login(){
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row gap-x-6 gap-y-3 items-center justify-center">
-                            <h1 onClick={() => router.push("/addpost")} className="font-sans font-semibold p-1 md:text-lg rounded-lg bg-yellow-300 hover:cursor-pointer">Add Post</h1>
-                            <h1 onClick={handleLogout} className="font-sans font-semibold p-1 md:text-lg rounded-lg bg-yellow-300 hover:cursor-pointer">Logout</h1>
+                            <h1 onClick={() => router.push("/addpost")} className="select-none font-sans font-semibold p-1 md:text-lg rounded-lg bg-yellow-300 hover:cursor-pointer">Add Post</h1>
+                            <h1 onClick={handleLogout} className="select-none font-sans font-semibold p-1 md:text-lg rounded-lg bg-yellow-300 hover:cursor-pointer">Logout</h1>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ export default function Login(){
                                 </div>
 
                                 <div className='flex flex-row justify-center items-center gap-x-3 my-3'>
-                                    <button className="font-sans bg-blue-400 w-35 md:w-40 p-1 rounded-lg font-bold hover:cursor-pointer hover:bg-blue-500 transition duraton-300">Update Post</button>
+                                    <button onClick={() => router.push(`/editpost/${dt.id}`)} className="font-sans bg-blue-400 w-35 md:w-40 p-1 rounded-lg font-bold hover:cursor-pointer hover:bg-blue-500 transition duraton-300">Update Post</button>
                                     <button onClick={() => deletePost(dt.id)} className="font-sans bg-blue-400 w-35 md:w-40 p-1 rounded-lg font-bold hover:cursor-pointer hover:bg-blue-500 transition duraton-300">Delete Post</button>
                                 </div>
                             </div>
