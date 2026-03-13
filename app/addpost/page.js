@@ -25,6 +25,7 @@ export default function AddPost(){
     const [date,setDate] = useState("");
     const [time,setTime] = useState("");
     const [link,setLink] = useState("");
+    const [restrictions,setRestrictions] = useState("");
     const [loading,setLoading] = useState(false);
 
     const router = useRouter();
@@ -72,6 +73,7 @@ export default function AddPost(){
                 end_date: date,
                 end_time: time,
                 link: link,
+                restrictions: restrictions,
                 timestamp: new Date()
             });
 
@@ -145,8 +147,9 @@ export default function AddPost(){
                             <label className="font-sans text-lg">No</label>
                         </div>
                     </div>
+                    <input value={restrictions} onChange={(e) => setRestrictions(e.target.value)} className="p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500" type="text" placeholder="Restrictions (Which company placed students cannot apply? If not leave empty)"/>
                     <input value={schools} onChange={(e) => setSchools(e.target.value)} required className="p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500" type="text" placeholder="Schools (SOC, SEEE, . . .)"/>
-                    <input value={dept} onChange={(e) => setDept(e.target.value)} required className="p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500" type="text" placeholder="Departments (CSE, AIDS, CSBT, . . .)"/>
+                    <input value={dept} onChange={(e) => setDept(e.target.value)} className="p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500" type="text" placeholder="Departments (CSE, AIDS, CSBT, . . .)"/>
                     <div className="mx-auto p-3 mb-4 rounded-2xl text-white w-68 border md:w-180 lg:mx-4 lg:w-210 border-gray-500">
                         <label className="font-sans text-xl">Deadline - Date & Time</label>
                         <div className="flex flex-col gap-y-2 mt-2">
