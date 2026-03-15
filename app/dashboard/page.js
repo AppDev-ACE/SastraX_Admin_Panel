@@ -12,6 +12,7 @@ export default function Login(){
     const [email,setEmail] = useState("");
     const [loading,setLoading] = useState(false);
     const [data,setData] = useState([]);
+    const [deleted,setDeleted] = useState(false);
 
     const router = useRouter();
 
@@ -52,7 +53,7 @@ export default function Login(){
         try{
             await deleteDoc(doc(db, "placements", id));
             setData(prev => prev.filter(item => item.id !== id));
-            alert("Deleted successfully");
+            setDeleted(true);
         }
         catch(error){
             console.log(error.message);
@@ -96,12 +97,24 @@ export default function Login(){
                         </div>
                         </div>
                     </>
+                }
+
+                {
+                    deleted && 
+                    <>
+                        <div className="z-20 fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                        <div className="font-mono flex flex-col items-center justify-center bg-gray-800 rounded-xl p-4 m-2 text-white text-xl font-bold">
+                            <h1>Post Deleted successfully</h1>
+                            <h2 className="bg-yellow-300 p-1 hover:cursor-pointer rounded-sm text-black" onClick={() => {setDeleted(false);router.push("/dashboard")}}>OK</h2>
+                        </div>
+                        </div>
+                    </>
                 } 
 
                 <div className='flex flex-row flex-wrap m-4 justify-center items-center font-sans gap-10 mx-auto'>
                     {
                         data.map((dt,index) => (
-                            <div key={index} className='border-3 w-77 md:w-100 border-gray-500 rounded-2xl flex flex-col items-center pt-12 relative hover:scale-102 transition duration-300 ease-in-out'>
+                            <div key={index} className='z-10 border-3 w-77 md:w-100 border-gray-500 rounded-2xl flex flex-col items-center pt-12 relative hover:scale-102 transition duration-300 ease-in-out'>
                                 <div className='absolute top-0 font-bold text-xl font-sans w-full bg-yellow-300 p-2 rounded-tr-2xl rounded-tl-2xl text-center select-none'>{dt.company}</div>
                                 {dt.role && <div className='font-semibold text-lg select-none text-gray-300 text-center'>{dt.role}</div>}
                                 <div className="font-sans text-justify text-white p-1 text-sm">{dt.description}</div>    

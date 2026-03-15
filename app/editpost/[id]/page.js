@@ -27,6 +27,7 @@ export default function EditPost(){
     const [time,setTime] = useState("");
     const [link,setLink] = useState("");
     const [restrictions,setRestrictions] = useState("");
+    const [updated,setUpdated] = useState(false);
 
     const [rounds, setRounds] = useState([
     {
@@ -191,8 +192,7 @@ export default function EditPost(){
                 link: link,
                 progress: progressArray
             });
-            alert("Updated successfully");
-            router.push("/dashboard");
+            setUpdated(true);
         }
         catch(error){
             console.log(error);
@@ -478,6 +478,18 @@ export default function EditPost(){
                 </div>
               </>
             }
+
+            {
+                updated && 
+                <>
+                    <div className="z-20 fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                    <div className="font-mono flex flex-col items-center justify-center bg-gray-800 rounded-xl p-4 m-2 text-white text-xl font-bold">
+                        <h1>Post Updated successfully</h1>
+                        <h2 className="bg-yellow-300 p-1 hover:cursor-pointer rounded-sm text-black" onClick={() => {setUpdated(false);router.push("/dashboard")}}>OK</h2>
+                    </div>
+                    </div>
+                </>
+            } 
         </div>
     )
 }

@@ -27,6 +27,7 @@ export default function AddPost(){
     const [link,setLink] = useState("");
     const [restrictions,setRestrictions] = useState("");
     const [loading,setLoading] = useState(false);
+    const [added,setAdded] = useState(false);
 
     const router = useRouter();
 
@@ -77,8 +78,24 @@ export default function AddPost(){
                 timestamp: new Date()
             });
 
-            alert("Added successfully");
-            router.push("/dashboard");
+            // SEND NOTIFICATION
+            const departments = dept.split(",");
+            for (const d of departments) {
+                const topic = `${batch}_${d.trim()}`;
+                await fetch("/api/sendNotification", {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                    title: "SASTRA Training and Placement Department",
+                    body: `${companyName} hiring for ${jobRole}. Check your SastraX campus placements for full details`,
+                    topic: topic
+                    })
+                });
+            }
+
+            setAdded(true);
         }
         catch (error) {
             console.log(error.message);
@@ -114,6 +131,18 @@ export default function AddPost(){
                 </div>
               </>
             } 
+
+            {
+              added && 
+              <>
+                <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                  <div className="font-mono flex flex-col items-center justify-center bg-gray-800 rounded-xl p-4 m-2 text-white text-xl font-bold">
+                    <h1>Post added successfully</h1>
+                    <h2 className="bg-yellow-300 p-1 hover:cursor-pointer rounded-sm text-black" onClick={() => {setAdded(false);router.push("/dashboard")}}>OK</h2>
+                  </div>
+                </div>
+              </>
+            }
     
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="mx-auto flex flex-col justify-center items-center mt-8 rounded-2xl py-4 shadow-2xl w-77 md:w-190 lg:w-250 xl:w-350 bg-gray-900">
