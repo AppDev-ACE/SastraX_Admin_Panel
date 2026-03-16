@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { OrbitProgress } from "react-loading-indicators";
+import Select from "react-select";
 
 export default function AddPost(){
 
@@ -103,6 +104,65 @@ export default function AddPost(){
         finally { setLoading(false); setCompanyName(""); setJobRole(""); setJobLocation(""); setBatch(""); setDescription(""); setCtc(""); setStipend(""); setCgpa(""); setStandingArrear(""); setHistoryArrear(""); setSchools(""); setDept(""); setDate(""); setTime(""); setLink(""); }
     }
 
+    const school = [
+        { value: "SOC", label: "SOC" },
+        { value: "SEEE", label: "SEEE" },
+        { value: "SOME", label: "SOME" },
+        { value: "SCBT", label: "SCBT" },
+        { value: "SOCE", label: "SOCE" },
+    ]
+
+    const socDept = [
+        { value: "All SOC Departments", label: "All SOC Departments" },
+        { value: "B.Tech. Computer Science & Engineering", label: "B.Tech. Computer Science & Engineering" },
+        { value: "B.Tech. Computer Science & Engineering (Artificial Intelligence & Data Science)", label: "B.Tech. Computer Science & Engineering (Artificial Intelligence & Data Science)" },
+        { value: "B.Tech. Computer Science & Engineering (Cyber Security & Block Chain Technology)", label: "B.Tech. Computer Science & Engineering (Cyber Security & Block Chain Technology)" },
+        { value: "B.Tech. Computer Science & Engineering (IoT & Automation)", label: "B.Tech. Computer Science & Engineering (IoT & Automation)" },
+        { value: "B.Tech. Computer Science & Engineering (Networks)", label: "B.Tech. Computer Science & Engineering (Networks)" },
+        { value: "B.Tech. Information Technology", label: "B.Tech. Information Technology" },
+        { value: "B.Tech. Information & Communication Technology", label: "B.Tech. Information & Communication Technology" },
+    ]
+
+    const seeeDept = [
+        { value: "All SEEE Departments", label: "All SEEE Departments" },
+        { value: "B.Tech. Electrical and Electronics Engineering", label: "B.Tech. Electrical and Electronics Engineering" },
+        { value: "B.Tech. Electronics & Communication Engineering", label: "B.Tech. Electronics & Communication Engineering" },
+        { value: "B.Tech. Electronics and Computer Engineering", label: "B.Tech. Electronics and Computer Engineering" },
+        { value: "B.Tech. Electronics & Instrumentation Engineering", label: "B.Tech. Electronics & Instrumentation Engineering" },
+        { value: "B.Tech. Electronics Engineering (VLSI Design & Technology)", label: "B.Tech. Electronics Engineering (VLSI Design & Technology)" },
+        { value: "B.Tech. Robotics & Artificial Intelligence", label: "B.Tech. Robotics & Artificial Intelligence" },
+    ]
+
+    const scbtDept = [
+        { value: "All SCBT Departments", label: "All SCBT Departments" },
+        { value: "B.Tech. Bioengineering", label: "B.Tech. Bioengineering" },
+        { value: "B.Tech. Bioinformatics", label: "B.Tech. Bioinformatics" },
+        { value: "B.Tech. Biotechnology", label: "B.Tech. Biotechnology" },
+        { value: "B.Tech. Chemical Engineering", label: "B.Tech. Chemical Engineering" },
+    ]
+
+    const someDept = [
+        { value: "All SOME Departments", label: "All SOME Departments" },
+        { value: "B.Tech. Aerospace Engineering", label: "B.Tech. Aerospace Engineering" },
+        { value: "B.Tech. Mechanical Engineering", label: "B.Tech. Mechanical Engineering" },
+        { value: "B.Tech. Mechatronics", label: "B.Tech. Mechatronics" },
+    ]
+
+    const soceDept = [
+        { value: "All SOCE Departments", label: "All SOCE    Departments" },
+        { value: "B.Tech. Civil Engineering [2018–19]", label: "B.Tech. Civil Engineering [2018–19]" },
+        { value: "B.Tech. Civil Engineering [2023–24]", label: "B.Tech. Civil Engineering [2023–24]" },
+    ]
+
+
+    const deptOptions = [
+        ...(schools.includes("SOC") ? socDept : []),
+        ...(schools.includes("SEEE") ? seeeDept : []),
+        ...(schools.includes("SCBT") ? scbtDept : []),
+        ...(schools.includes("SOME") ? someDept : []),
+        ...(schools.includes("SOCE") ? soceDept : []),
+    ];
+
     return (
         <div className="relative bg-black min-h-screen mx-auto py-5">
             <div className="mx-auto bg-gray-900 border border-gray-500 p-2 rounded-xl w-77 md:w-190 lg:w-250 xl:w-350">
@@ -124,7 +184,7 @@ export default function AddPost(){
             {
               loading && 
               <>
-                <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                <div className="z-20 fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
                   <div className="font-mono m-2 text-white text-3xl font-bold">
                     <OrbitProgress variant="disc" color="#f6cb00" size="medium" text="" textColor="" />
                   </div>
@@ -135,7 +195,7 @@ export default function AddPost(){
             {
               added && 
               <>
-                <div className="fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                <div className="z-20 fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
                   <div className="font-mono flex flex-col items-center justify-center bg-gray-800 rounded-xl p-4 m-2 text-white text-xl font-bold">
                     <h1>Post added successfully</h1>
                     <h2 className="bg-yellow-300 p-1 hover:cursor-pointer rounded-sm text-black" onClick={() => {setAdded(false);router.push("/dashboard")}}>OK</h2>
@@ -177,13 +237,28 @@ export default function AddPost(){
                         </div>
                     </div>
                     <input value={restrictions} onChange={(e) => setRestrictions(e.target.value)} className="p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500" type="text" placeholder="Restrictions (Which company placed students cannot apply? If not leave empty)"/>
-                    <input value={schools} onChange={(e) => setSchools(e.target.value)} required className="p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500" type="text" placeholder="Schools (SOC, SEEE, . . .)"/>
-                    <input value={dept} onChange={(e) => setDept(e.target.value)} className="p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500" type="text" placeholder="Departments (CSE, AIDS, CSBT, . . .)"/>
+                    <div className="flex flex-col p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500">
+                        <Select onChange={(selected) => setSchools(selected.map(s => s.value).join(","))} instanceId="schools-select" name="schools" options={school} isMulti placeholder="Schools" classNames={{control:()=> "bg-gray-900 border border-gray-500 text-white rounded-lg",valueContainer:()=> "bg-gray-900 text-white gap-1",input:()=> "text-white",placeholder:()=> "text-gray-400",menu:()=> "bg-gray-900",menuList:()=> "bg-gray-900",option:({isFocused,isSelected})=> isSelected?"!bg-gray-600 text-white":isFocused?"!bg-gray-700 text-white":"!bg-gray-900 text-white",multiValue:()=> "!bg-gray-700 !rounded-md px-2",multiValueLabel:()=> "!text-white",multiValueRemove:()=> "!text-white hover:!bg-red-500 hover:!text-white"}}/>
+                    </div>
+                    {
+                        deptOptions.length > 0 && (
+                            <div className="flex flex-col p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500">
+                                <Select
+                                onChange={(selected)=>setDept(selected.map(s=>s.value).join(","))}
+                                instanceId="dept-select"
+                                options={deptOptions}
+                                isMulti
+                                placeholder="Departments"
+                                classNames={{control:()=> "bg-gray-900 border border-gray-500 text-white rounded-lg",valueContainer:()=> "bg-gray-900 text-white gap-1",input:()=> "text-white",placeholder:()=> "text-gray-400",menu:()=> "bg-gray-900",menuList:()=> "bg-gray-900",option:({isFocused,isSelected})=> isSelected?"!bg-gray-600 text-white":isFocused?"!bg-gray-700 text-white":"!bg-gray-900 text-white",multiValue:()=> "!bg-gray-700 !rounded-md px-2",multiValueLabel:()=> "!text-white",multiValueRemove:()=> "!text-white hover:!bg-red-500 hover:!text-white"}}
+                                />
+                            </div>
+                        )
+                    }
                     <div className="mx-auto p-3 mb-4 rounded-2xl text-white w-68 border md:w-180 lg:mx-4 lg:w-210 border-gray-500">
                         <label className="font-sans text-xl">Deadline - Date & Time</label>
                         <div className="flex flex-col gap-y-2 mt-2">
-                            <input value={date} onChange={(e) => setDate(e.target.value)} required className="border border-gray-500 rounded-xl p-2 w-40" type="date" placeholder="Schools (SOC, SEEE, ...)"/>
-                            <input value={time} onChange={(e) => setTime(e.target.value)} required className="border border-gray-500 rounded-xl p-2 w-40" type="time" placeholder="Schools (SOC, SEEE, ...)"/>
+                            <input value={date} onChange={(e) => setDate(e.target.value)} min={new Date().toISOString().split("T")[0]} required className="border border-gray-500 rounded-xl p-2 w-40" type="date" placeholder="Schools (SOC, SEEE, ...)"/>
+                            <input value={time} onChange={(e) => setTime(e.target.value)} min={date === new Date().toISOString().split("T")[0] ? new Date().toTimeString().slice(0,5) : "00:00"} required className="border border-gray-500 rounded-xl p-2 w-40" type="time" placeholder="Schools (SOC, SEEE, ...)"/>
                         </div>
                     </div>
                     <input value={link} onChange={(e) => setLink(e.target.value)} required className="p-3 mb-4 ml-2 w-68 font-sans text-white text-lg md:w-180 lg:mx-4 lg:w-210 rounded-xl border border-gray-500" type="text" placeholder="Paste Google Form Link"/>
