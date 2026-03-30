@@ -118,13 +118,13 @@ export default function Login(){
                                 <div className='absolute top-0 font-bold text-xl font-sans w-full bg-yellow-300 p-2 rounded-tr-2xl rounded-tl-2xl text-center select-none'>{dt.company}</div>
                                 {dt.role && <div className='font-semibold text-lg select-none text-gray-300 text-center'>{dt.role}</div>}
                                 <div className="font-sans text-justify text-white p-1 text-sm">{dt.description}</div>    
-                                <div className="font-sans font-semibold p-1 flex flex-wrap gap-2 justify-center">
+                                <div className="font-sans font-semibold p-1 flex flex-col w-75 md:w-100 gap-2 justify-center">
                                     <h1 className="bg-green-400 p-1 rounded-sm">CTC: {dt.ctc}</h1>
                                     {dt.stipend && <h1 className="bg-green-400 p-1 rounded-sm">Stipend: {dt.stipend}</h1>}
                                     <h1 className="bg-green-400 p-1 rounded-sm">CGPA: {dt.cgpa_threshold}</h1>
                                     <h1 className="bg-green-400 p-1 rounded-sm">Schools: {dt.schools}</h1>
                                     {dt.location && <h1 className="bg-green-400 p-1 rounded-sm">Location: {dt.location}</h1>}
-                                    <h1 className="bg-green-400 p-1 rounded-sm">Departments: {dt.departments}</h1>
+                                    <h1 className="bg-green-400 p-1 rounded-sm break-words">Departments: {dt.departments}</h1>
                                     <h1 className="bg-green-400 p-1 rounded-sm">Standing Arrear: {dt.currentArrear}</h1>
                                     <h1 className="bg-green-400 p-1 rounded-sm">History of Arrears: {dt.historyOfArrear}</h1>
                                 </div>
