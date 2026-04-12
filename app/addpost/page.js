@@ -117,7 +117,7 @@ export default function AddPost(){
         { value: "B_Tech_Computer_Science_and_Engineering", label: "B_Tech_Computer_Science_and_Engineering" },
         { value: "B_Tech_Computer_Science_and_Engineering_Artificial_Intelligence_and_Data_Science", label: "B_Tech_Computer_Science_and_Engineering_Artificial_Intelligence_and_Data_Science" },
         { value: "B_Tech_Computer_Science_and_Engineering_Cyber_Security_and_Block_Chain_Technology", label: "B_Tech_Computer_Science_and_Engineering_Cyber_Security_and_Block_Chain_Technology" },
-        { value: "B_Tech_Computer_Science_and_Engineering_IoT & Automation", label: "B_Tech_Computer_Science_and_Engineering_IoT_and_Automation" },
+        { value: "B_Tech_Computer_Science_and_Engineering_IoT_and_Automation", label: "B_Tech_Computer_Science_and_Engineering_IoT_and_Automation" },
         { value: "B_Tech_Computer_Science_and_Engineering_Networks", label: "B_Tech_Computer_Science_and_Engineering_Networks" },
         { value: "B_Tech_Information_Technology", label: "B_Tech_Information_Technology" },
         { value: "B_Tech_Information_and_Communication_Technology", label: "B_Tech_Information_and_Communication_Technology" },
