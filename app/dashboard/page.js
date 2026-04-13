@@ -13,6 +13,8 @@ export default function Login(){
     const [loading,setLoading] = useState(false);
     const [data,setData] = useState([]);
     const [deleted,setDeleted] = useState(false);
+    const [confirmDelete,setConfirmDelete] = useState(false);
+    const [deleteId,setDeleteId] = useState("");
 
     const router = useRouter();
 
@@ -111,6 +113,21 @@ export default function Login(){
                     </>
                 } 
 
+                {
+                    confirmDelete && 
+                    <>
+                        <div className="z-20 fixed inset-0 flex flex-col justify-center backdrop-blur-sm items-center">
+                        <div className="font-mono flex flex-col items-center justify-center bg-gray-800 rounded-xl p-4 m-2 text-white text-xl font-bold">
+                            <h1>Are you sure to delete this post? This action cannot be retrieved.</h1>
+                            <div className="flex flex-row gap-x-5">
+                                <h2 className="bg-yellow-300 p-1 hover:cursor-pointer rounded-sm text-black" onClick={() => {deletePost(deleteId);setConfirmDelete(false);}}>Delete</h2>
+                                <h2 className="bg-yellow-300 p-1 hover:cursor-pointer rounded-sm text-black" onClick={() => setConfirmDelete(false)}>Cancel</h2>
+                            </div>
+                        </div>
+                        </div>
+                    </>
+                } 
+
                 <div className='flex flex-row flex-wrap m-4 justify-center items-center font-sans gap-10 mx-auto'>
                     {
                         data.map((dt,index) => (
@@ -134,7 +151,7 @@ export default function Login(){
 
                                 <div className='flex flex-row justify-center items-center gap-x-3 my-3'>
                                     <button onClick={() => router.push(`/editpost/${dt.id}`)} className="font-sans bg-blue-400 w-35 md:w-40 p-1 rounded-lg font-bold hover:cursor-pointer hover:bg-blue-500 transition duraton-300">Update Post</button>
-                                    <button onClick={() => deletePost(dt.id)} className="font-sans bg-blue-400 w-35 md:w-40 p-1 rounded-lg font-bold hover:cursor-pointer hover:bg-blue-500 transition duraton-300">Delete Post</button>
+                                    <button onClick={() => {setConfirmDelete(true);setDeleteId(dt.id)}} className="font-sans bg-blue-400 w-35 md:w-40 p-1 rounded-lg font-bold hover:cursor-pointer hover:bg-blue-500 transition duraton-300">Delete Post</button>
                                 </div>
                             </div>
                         ))

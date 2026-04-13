@@ -90,7 +90,7 @@ export default function AddPost(){
                     },
                     body: JSON.stringify({
                     title: "SASTRA Training and Placement Department",
-                    body: `${companyName} hiring for ${jobRole}. Check your SastraX campus placements for full details`,
+                    body: `${companyName} hiring for ${jobRole}. Check your UniFy campus placements for full details`,
                     topic: topic
                     })
                 });
@@ -129,7 +129,7 @@ export default function AddPost(){
         { value: "B_Tech_Electronics_and_Communication_Engineering", label: "B_Tech_Electronics_and_Communication_Engineering" },
         { value: "B_Tech_Electronics_and_Computer_Engineering", label: "B_Tech_Electronics_and_Computer_Engineering" },
         { value: "B_Tech_Electronics_and_Instrumentation_Engineering", label: "B_Tech_Electronics_and_Instrumentation_Engineering" },
-        { value: "B_Tech_Electronics_Engineering_VLSI_Design_and_Technology)", label: "B_Tech_Electronics Engineering_VLSI_Design_and_Technology)" },
+        { value: "B_Tech_Electronics_Engineering_VLSI_Design_and_Technology", label: "B_Tech_Electronics Engineering_VLSI_Design_and_Technology" },
         { value: "B_Tech_Robotics_and_Artificial_Intelligence", label: "B_Tech_Robotics_Artificial_Intelligence" },
     ]
 

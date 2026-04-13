@@ -193,6 +193,24 @@ export default function EditPost(){
                 link: link,
                 progress: progressArray
             });
+
+            // SEND NOTIFICATION
+            const departments = dept.split(",");
+            for (const d of departments) {
+                const topic = `${batch}_${d.trim()}`;
+                await fetch("/api/sendNotification", {
+                    method: "POST",
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                    title: "SASTRA Training and Placement Department",
+                    body: `There is an update regarding ${companyName} hiring for ${jobRole}. Check your UniFy campus placements for full details.`,
+                    topic: topic
+                    })
+                });
+            }
+
             setUpdated(true);
         }
         catch(error){
@@ -210,45 +228,43 @@ export default function EditPost(){
     ]
 
     const socDept = [
-        { value: "All SOC Departments", label: "All SOC Departments" },
-        { value: "B.Tech. Computer Science & Engineering", label: "B.Tech. Computer Science & Engineering" },
-        { value: "B.Tech. Computer Science & Engineering (Artificial Intelligence & Data Science)", label: "B.Tech. Computer Science & Engineering (Artificial Intelligence & Data Science)" },
-        { value: "B.Tech. Computer Science & Engineering (Cyber Security & Block Chain Technology)", label: "B.Tech. Computer Science & Engineering (Cyber Security & Block Chain Technology)" },
-        { value: "B.Tech. Computer Science & Engineering (IoT & Automation)", label: "B.Tech. Computer Science & Engineering (IoT & Automation)" },
-        { value: "B.Tech. Computer Science & Engineering (Networks)", label: "B.Tech. Computer Science & Engineering (Networks)" },
-        { value: "B.Tech. Information Technology", label: "B.Tech. Information Technology" },
-        { value: "B.Tech. Information & Communication Technology", label: "B.Tech. Information & Communication Technology" },
+        { value: "All_SOC_Departments", label: "All_SOC_Departments" },
+        { value: "B_Tech_Computer_Science_and_Engineering", label: "B_Tech_Computer_Science_and_Engineering" },
+        { value: "B_Tech_Computer_Science_and_Engineering_Artificial_Intelligence_and_Data_Science", label: "B_Tech_Computer_Science_and_Engineering_Artificial_Intelligence_and_Data_Science" },
+        { value: "B_Tech_Computer_Science_and_Engineering_Cyber_Security_and_Block_Chain_Technology", label: "B_Tech_Computer_Science_and_Engineering_Cyber_Security_and_Block_Chain_Technology" },
+        { value: "B_Tech_Computer_Science_and_Engineering_IoT_and_Automation", label: "B_Tech_Computer_Science_and_Engineering_IoT_and_Automation" },
+        { value: "B_Tech_Computer_Science_and_Engineering_Networks", label: "B_Tech_Computer_Science_and_Engineering_Networks" },
+        { value: "B_Tech_Information_Technology", label: "B_Tech_Information_Technology" },
+        { value: "B_Tech_Information_and_Communication_Technology", label: "B_Tech_Information_and_Communication_Technology" },
     ]
 
     const seeeDept = [
-        { value: "All SEEE Departments", label: "All SEEE Departments" },
-        { value: "B.Tech. Electrical and Electronics Engineering", label: "B.Tech. Electrical and Electronics Engineering" },
-        { value: "B.Tech. Electronics & Communication Engineering", label: "B.Tech. Electronics & Communication Engineering" },
-        { value: "B.Tech. Electronics and Computer Engineering", label: "B.Tech. Electronics and Computer Engineering" },
-        { value: "B.Tech. Electronics & Instrumentation Engineering", label: "B.Tech. Electronics & Instrumentation Engineering" },
-        { value: "B.Tech. Electronics Engineering (VLSI Design & Technology)", label: "B.Tech. Electronics Engineering (VLSI Design & Technology)" },
-        { value: "B.Tech. Robotics & Artificial Intelligence", label: "B.Tech. Robotics & Artificial Intelligence" },
+        { value: "All_SEEE_Departments", label: "All_SEEE_Departments" },
+        { value: "B_Tech_Electrical_and_Electronics_Engineering", label: "B_Tech_Electrical_and_Electronics_Engineering" },
+        { value: "B_Tech_Electronics_and_Communication_Engineering", label: "B_Tech_Electronics_and_Communication_Engineering" },
+        { value: "B_Tech_Electronics_and_Computer_Engineering", label: "B_Tech_Electronics_and_Computer_Engineering" },
+        { value: "B_Tech_Electronics_and_Instrumentation_Engineering", label: "B_Tech_Electronics_and_Instrumentation_Engineering" },
+        { value: "B_Tech_Electronics_Engineering_VLSI_Design_and_Technology", label: "B_Tech_Electronics Engineering_VLSI_Design_and_Technology" },
+        { value: "B_Tech_Robotics_and_Artificial_Intelligence", label: "B_Tech_Robotics_Artificial_Intelligence" },
     ]
 
     const scbtDept = [
-        { value: "All SCBT Departments", label: "All SCBT Departments" },
-        { value: "B.Tech. Bioengineering", label: "B.Tech. Bioengineering" },
-        { value: "B.Tech. Bioinformatics", label: "B.Tech. Bioinformatics" },
-        { value: "B.Tech. Biotechnology", label: "B.Tech. Biotechnology" },
-        { value: "B.Tech. Chemical Engineering", label: "B.Tech. Chemical Engineering" },
+        { value: "All_SCBT_Departments", label: "All_SCBT_Departments" },
+        { value: "B_Tech_Bioengineering", label: "B_Tech_Bioengineering" },
+        { value: "B_Tech_Bioinformatics", label: "B_Tech_Bioinformatics" },
+        { value: "B_Tech_Biotechnology", label: "B_Tech_Biotechnology" },
+        { value: "B_Tech_Chemical_Engineering", label: "B_Tech_Chemical_Engineering" },
     ]
 
     const someDept = [
-        { value: "All SOME Departments", label: "All SOME Departments" },
-        { value: "B.Tech. Aerospace Engineering", label: "B.Tech. Aerospace Engineering" },
-        { value: "B.Tech. Mechanical Engineering", label: "B.Tech. Mechanical Engineering" },
-        { value: "B.Tech. Mechatronics", label: "B.Tech. Mechatronics" },
+        { value: "All_SOME_Departments", label: "All_SOME_Departments" },
+        { value: "B_Tech_Aerospace_Engineering", label: "B_Tech_Aerospace_Engineering" },
+        { value: "B_Tech_Mechanical_Engineering", label: "B_Tech_Mechanical_Engineering" },
+        { value: "B_Tech_Mechatronics", label: "B_Tech_Mechatronics" },
     ]
 
     const soceDept = [
-        { value: "All SOCE Departments", label: "All SOCE    Departments" },
-        { value: "B.Tech. Civil Engineering [2018–19]", label: "B.Tech. Civil Engineering [2018–19]" },
-        { value: "B.Tech. Civil Engineering [2023–24]", label: "B.Tech. Civil Engineering [2023–24]" },
+        { value: "B_Tech_Civil_Engineering", label: "B.Tech_Civil_Engineering" },
     ]
 
 
