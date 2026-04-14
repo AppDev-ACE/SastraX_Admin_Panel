@@ -405,20 +405,20 @@ export default function EditPost(){
                 <div className="p-4 mb-4 border border-gray-500 rounded-xl w-68 md:w-180 lg:w-210 text-white">
                 <label className="text-lg font-semibold">Deadline</label>
 
-                <div className="flex gap-4 mt-2">
-                <input
-                type="date"
-                value={date}
-                onChange={(e)=>setDate(e.target.value)}
-                className="border border-gray-500 rounded-xl p-2"
-                />
+                <div className="flex flex-col md:flex-row gap-4 mt-2">
+                    <input
+                    type="date"
+                    value={date}
+                    onChange={(e)=>setDate(e.target.value)}
+                    className="border border-gray-500 rounded-xl p-2"
+                    />
 
-                <input
-                type="time"
-                value={time}
-                onChange={(e)=>setTime(e.target.value)}
-                className="border border-gray-500 rounded-xl p-2"
-                />
+                    <input
+                    type="time"
+                    value={time}
+                    onChange={(e)=>setTime(e.target.value)}
+                    className="border border-gray-500 rounded-xl p-2"
+                    />
                 </div>
                 </div>
 
@@ -455,7 +455,7 @@ export default function EditPost(){
 
                 <div className="mb-3">
 
-                <label className="mr-4 font-lg">Is this round completed?&nbsp;&nbsp;
+                <label className="mr-4 font-lg">Is this round completed<br></br>
                 <input
                 type="radio"
                 checked={r.completed==="Yes"}
@@ -492,7 +492,7 @@ export default function EditPost(){
                 className="border border-gray-500 rounded-xl p-2 w-full mb-3"
                 />
 
-                <div className="flex gap-4">
+                <div className="flex flex-col md:flex-row gap-4">
 
                 <input
                 type="date"
@@ -544,8 +544,8 @@ export default function EditPost(){
                 ))}
 
 
-                <div className="flex flex-row gap-x-6">
-                    <button type="button" onClick={addNewRound} className="bg-yellow-300 text-black font-bold px-6 py-2 rounded-lg mb-6 hover:cursor-pointer">Add Another Round</button>
+                <div className="flex justify-center items-center flex-col md:flex-row gap-x-6 gap-y-4">
+                    <button type="button" onClick={addNewRound} className="bg-yellow-300 text-black font-bold px-6 py-2 h-10 text-xl rounded-lg hover:cursor-pointer">Add Another Round</button>
                     <button type="submit" className="bg-yellow-300 text-black font-bold text-xl w-52 h-10 rounded-lg hover:cursor-pointer">Update Post</button>
                 </div>
 

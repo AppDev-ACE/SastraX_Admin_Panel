@@ -15,6 +15,8 @@ export default function Login(){
     const [deleted,setDeleted] = useState(false);
     const [confirmDelete,setConfirmDelete] = useState(false);
     const [deleteId,setDeleteId] = useState("");
+    const [searchName,setSearchName] = useState("");
+    const [allJobs,setAllJobs] = useState([]);
 
     const router = useRouter();
 
@@ -40,8 +42,9 @@ export default function Login(){
                 .map(doc => ({
                     id: doc.id,
                     ...doc.data()
-                }));    
+                }));                    
                 setData(jobs);
+                setAllJobs(jobs);
             }
             catch(error){
                 console.log(error.message);
@@ -50,6 +53,11 @@ export default function Login(){
         }
         fetchData();
     },[]);
+
+    useEffect(() => {
+        const filteredJobs = allJobs.filter((job) => (job.company).toLowerCase().includes(searchName.toLowerCase()));
+        setData(filteredJobs);
+    },[searchName,allJobs]);
 
     async function deletePost(id){
         try{
@@ -82,13 +90,15 @@ export default function Login(){
                                 <div className="select-none font-sans font-bold text-yellow-300 text-lg md:text-2xl">Welcome Admin</div>
                                 <div className="select-none font-sans font-semibold text-yellow-300 text-sm md:text-sm">{email}</div>
                             </div>
-                        </div>
+                        </div>                        
                         <div className="flex flex-col md:flex-row gap-x-6 gap-y-3 items-center justify-center">
                             <h1 onClick={() => router.push("/addpost")} className="select-none font-sans font-semibold p-1 md:text-lg rounded-lg bg-yellow-300 hover:cursor-pointer">Add Post</h1>
                             <h1 onClick={handleLogout} className="select-none font-sans font-semibold p-1 md:text-lg rounded-lg bg-yellow-300 hover:cursor-pointer">Logout</h1>
                         </div>
                     </div>
                 </div>
+
+                <input value={searchName} onChange={(e) => setSearchName(e.target.value)} className="flex justify-center items-center mx-auto mt-5 font-sans text-white p-1 md:p-4 rounded-lg md:rounded-xl border border-gray-500 md:text-xl w-75 md:w-180" placeholder="Search post by typing company name..."/>
 
                 {
                     loading && 
